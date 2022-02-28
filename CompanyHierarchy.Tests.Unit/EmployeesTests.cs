@@ -154,4 +154,20 @@ public class EmployeesTests
             .ThrowExactly<CircularReferenceException>()
             .WithMessage("Employee: Employee2 and Employee4 are in a circular reference.");
     }
+
+    [Fact]
+    public void GetSalaryBudgetForManager_ShouldReturnSalaryBudget_IfCsvStringValid()
+    {
+        // Arrange
+        var csvString = "'Employee1','Employee5',500 \n" +
+                        "'Employee4','Employee2',1300\n" +
+                        "'Employee3','Employee1',830 \n" +
+                        "'Employee5','Employee4',400";
+        
+        // Act
+        var result = new Employees(csvString).GetSalaryBudgetForManger("Employee1");
+        
+        // Assert
+        result.Should().Be(1300);
+    }
 }

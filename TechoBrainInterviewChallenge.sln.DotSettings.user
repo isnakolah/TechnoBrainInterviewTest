@@ -1,0 +1,11 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2ff55f60_002Dd403_002D428e_002Dbbcc_002D78e18c0f471e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EmployeesConstructor_ShouldThrowCsvStringIsNullOrEmptyException_IfCsvStringIsWhiteSpace" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::38D7E4A1-CD33-4658-BD29-2CC9BA31F92C::net6.0::CompanyHierarchy.Tests.Unit.EmployeesTests.EmployeesConstructor_ShouldThrowCsvStringIsNullOrEmptyException_IfCsvStringIsWhiteSpace&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=613114a1_002D0f8e_002D40c7_002Da871_002Dad62da2a5048/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EmployeeConstructor_ShouldInitializeCorrectly_IfCsvStringIsValid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::38D7E4A1-CD33-4658-BD29-2CC9BA31F92C::net6.0::CompanyHierarchy.Tests.Unit.EmployeesTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

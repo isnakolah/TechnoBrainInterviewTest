@@ -12,6 +12,6 @@ This is a C# .NET console application with a Employees model class with logic fo
 
 ## Limitations
 
-- Empty strings in the csv file wrapped with another pair of quotations so the string.IsNullOrWhitespace reads this as not an empty string. This results in multiple CEOs being added.
-- No logic to check if employee does not have manager, or managerial chain reaches the CEO
+- Empty strings in the csv file wrapped with another pair of quotations so the string.IsNullOrWhitespace reads this as not an empty string. This results in multiple CEOs being added. Could be fixed by removing the strings
+- No logic to check if managerial chain reaches the CEO
 - Double quotations in the strings

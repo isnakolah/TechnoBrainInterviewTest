@@ -95,7 +95,7 @@ public class EmployeesTests
                 "\"Employee4\",\"Employee2\",1300\n" +
                 "\"Employee3\",\"Employee1\",830 \n" +
                 "\"Employee5\",\"Employee4\",400", "Employee1")]
-    public void EmployeesConstructor_ShouldThrowInvalidIntegerException_IfSalaryIsInvalidInteger(string csvString, 
+    public void EmployeesConstructor_ShouldThrowInvalidIntegerException_IfSalaryIsInvalidInteger(string csvString,
         string invalidEmployeeSalaryId)
     {
         // Act
@@ -166,7 +166,8 @@ public class EmployeesTests
     [InlineData("\"Employee1\"", 1_930)]
     [InlineData("\"Employee8\"", 1_730)]
     [InlineData("\"Employee5\"", 4_990)]
-    public void GetManagerSalaryBudget_ShouldReturnSalaryBudget_IfManagerIdIsValid(string managerId, long expectSalaryBudget)
+    public void GetManagerSalaryBudget_ShouldReturnSalaryBudget_IfManagerIdIsValid(string managerId,
+        long expectSalaryBudget)
     {
         // Act
         var result = new Employees(validCsvString2).GetSalaryBudgetForManager(managerId);
@@ -214,32 +215,15 @@ public class EmployeesTests
     {
         // Arrange
         const string csvString = "\"Employee4\",\"Employee2\",500 \n" +
-                        "\"Employee2\",\"Employee1\",830 \n" +
-                        "\"Employee3\",\"Employee4\",830 \n" +
-                        "\"Employee1\",\",1000\n" +
-                        "\"Employee5\",\"Employee4\",400";
-
-        // Act
-        var result = () => new Employees(csvString).GetSalaryBudgetForManager("Employee6");
-
-        // Assert
-        result.Should().ThrowExactly<ManagerNotFoundException>("Manager with id Employee6 was not found");
-    }
-
-    [Fact(Skip = "Not able to check if employee is manager in current logic, just returns the salary of employee")]
-    public void GetManagerSalaryBudget_ShouldThrowEmployeeNotManagerException_IfEmployeeIsNotAManager()
-    {
-        // Arrange
-        const string csvString = "\"Employee4\",\"Employee2\",500 \n" +
                                  "\"Employee2\",\"Employee1\",830 \n" +
                                  "\"Employee3\",\"Employee4\",830 \n" +
                                  "\"Employee1\",\",1000\n" +
                                  "\"Employee5\",\"Employee4\",400";
 
         // Act
-        var result = () => new Employees(csvString).GetSalaryBudgetForManager("Employee5");
+        var result = () => new Employees(csvString).GetSalaryBudgetForManager("Employee6");
 
         // Assert
-        result.Should().ThrowExactly<EmployeeNotManagerException>("Employee with id Employee5 is not a manager");
+        result.Should().ThrowExactly<ManagerNotFoundException>("Manager with id Employee6 was not found");
     }
 }

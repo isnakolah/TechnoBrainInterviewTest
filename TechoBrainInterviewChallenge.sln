@@ -4,6 +4,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyHierarchy", "Company
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyHierarchy.Tests.Unit", "CompanyHierarchy.Tests.Unit\CompanyHierarchy.Tests.Unit.csproj", "{38D7E4A1-CD33-4658-BD29-2CC9BA31F92C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{6182BEF4-A080-463A-85CA-B5242975F5DB}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VCS", "VCS", "{3C231484-6994-48A0-A89B-A3F7CDA40FD0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +28,8 @@ Global
 		{38D7E4A1-CD33-4658-BD29-2CC9BA31F92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38D7E4A1-CD33-4658-BD29-2CC9BA31F92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38D7E4A1-CD33-4658-BD29-2CC9BA31F92C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3C231484-6994-48A0-A89B-A3F7CDA40FD0} = {6182BEF4-A080-463A-85CA-B5242975F5DB}
 	EndGlobalSection
 EndGlobal

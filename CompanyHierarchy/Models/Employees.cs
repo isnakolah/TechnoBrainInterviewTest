@@ -63,13 +63,11 @@ internal sealed class Employees
 
         return entries;
     }
-    
-    private bool IsCircularReference(string employeeId, string managerId)
+
+    private bool IsCircularReference(string employeeId, string? managerId)
     {
-        if (string.IsNullOrWhiteSpace(managerId))
-            return false;
-        
-        // If employee exists
+        managerId ??= string.Empty;
+
         if (employees.ContainsKey(employeeId))
             return employees[employeeId].managerId == managerId;
 

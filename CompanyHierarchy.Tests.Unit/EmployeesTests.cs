@@ -5,20 +5,20 @@ namespace CompanyHierarchy.Tests.Unit;
 
 public class EmployeesTests
 {
-    private const string validCsvString1 = "'Employee4','Employee2',500 \n" +
-                                           "'Employee3','Employee4',830 \n" +
-                                           "'Employee1','',1000\n" +
-                                           "'Employee5','Employee4',400";
+    private const string validCsvString1 = "\"Employee4\",\"Employee2\",500 \n" +
+                                           "\"Employee3\",\"Employee4\",830 \n" +
+                                           "\"Employee1\",\",1000\n" +
+                                           "\"Employee5\",\"Employee4\",400";
 
-    private const string validCsvString2 = "'Employee1','Employee5',500 \n" +
-                                           "'Employee4','',1300\n" +
-                                           "'Employee3','Employee1',830 \n" +
-                                           "'Employee5','Employee4',400";
+    private const string validCsvString2 = "\"Employee1\",\"Employee5\",500 \n" +
+                                           "\"Employee4\",\",1300\n" +
+                                           "\"Employee3\",\"Employee1\",830 \n" +
+                                           "\"Employee5\",\"Employee4\",400";
 
-    private const string validCsvString3 = "'Employee3','Employee2',500 \n" +
-                                           "'Employee3','Employee1',830 \n" +
-                                           "'Employee5','Employee4',400" +
-                                           "'Employee1','',1101\n";
+    private const string validCsvString3 = "\"Employee3\",\"Employee2\",500 \n" +
+                                           "\"Employee2\",\"Employee1\",830 \n" +
+                                           "\"Employee5\",\"Employee3\",400 \n" +
+                                           "\"Employee1\",\",1101";
 
    [Theory]
    [InlineData(validCsvString1)]
@@ -77,20 +77,20 @@ public class EmployeesTests
     }
 
     [Theory]
-    [InlineData("Employee1,Employee5,500\n" +
-                "Employee4,Employee2,1300\n" +
-                "Employee3,Employee1,830\n" +
-                "Employee5,Employee4,'400'", "Employee5")]
+    [InlineData("\"Employee1\",\"Employee5\",500\n" +
+                "\"Employee4\",\"Employee2\",1300\n" +
+                "\"Employee3\",\"Employee1\",830\n" +
+                "\"Employee5\",\"Employee4\",\"400\"", "Employee5")]
 
-    [InlineData("Employee1,Employee5,'' \n" +
-                "Employee4,Employee2,1300\n" +
-                "Employee3,Employee1,830 \n" +
-                "Employee5,Employee4,400", "Employee1")]
+    [InlineData("\"Employee1\",\"Employee5\",\" \n" +
+                "\"Employee4\",\"Employee2\",1300\n" +
+                "\"Employee3\",\"Employee1\",830 \n" +
+                "\"Employee5\",\"Employee4\",400", "Employee1")]
     
-    [InlineData("Employee1,Employee5,\n" +
-                "Employee4,Employee2,1300\n" +
-                "Employee3,Employee1,830 \n" +
-                "Employee5,Employee4,400", "Employee1")]
+    [InlineData("\"Employee1\",\"Employee5\",\n" +
+                "\"Employee4\",\"Employee2\",1300\n" +
+                "\"Employee3\",\"Employee1\",830 \n" +
+                "\"Employee5\",\"Employee4\",400", "Employee1")]
     public void EmployeesConstructor_ShouldThrowInvalidIntegerException_IfSalaryIsInvalidInteger(string csvString, string invalidEmployeeSalaryId)
     {
         // Act
@@ -99,17 +99,17 @@ public class EmployeesTests
         // Assert
         result.Should()
             .ThrowExactly<InvalidIntegerException>()
-            .WithMessage($"Invalid integer value for salary of employee: {invalidEmployeeSalaryId}");
+            .WithMessage($"Invalid integer value for salary of employee: \"{invalidEmployeeSalaryId}\"");
     }
     
     [Fact]
     public void EmployeesConstructor_ShouldThrowEmployeeAlreadyHasManagerException_IfEmployeeHasManager()
     {
         // Arrange
-        var csvString = "'Employee1','Employee5',500 \n" +
-                        "'Employee4','Employee2',1300\n" +
-                        "'Employee3','Employee1',830 \n" +
-                        "'Employee3','Employee4',400";
+        var csvString = "\"Employee1\",\"Employee5\",500 \n" +
+                        "\"Employee4\",\"Employee2\",1300\n" +
+                        "\"Employee3\",\"Employee1\",830 \n" +
+                        "\"Employee3\",\"Employee4\",400";
 
         // Act
         var result = () => new Employees(csvString);
@@ -117,18 +117,19 @@ public class EmployeesTests
         // Assert
         result.Should()
             .ThrowExactly<EmployeeAlreadyHasManagerException>()
-            .WithMessage("Employee with id Employee3 already has a reporting manager.");
+            .WithMessage("Employee with id \"Employee3\" already has a reporting manager.");
     }
 
 
     [Fact]
     public void EmployeesConstructor_ShouldThrowCEOAlreadyExistsException_IfCEOAlreadyExists()
+    
     {
         // Arrange
-        var csvString = "'Employee1','Employee5',500 \n" +
-                        "'Employee4','',1300\n" +
-                        "'Employee3','',830 \n" +
-                        "'Employee5','Employee4',400";
+        var csvString = "\"Employee1\",\"Employee5\",500 \n" +
+                        "\"Employee4\",,1300\n" +
+                        "\"Employee3\",,830 \n" +
+                        "\"Employee5\",\"Employee4\",400";
 
         // Act
         var result = () => new Employees(csvString);
@@ -141,10 +142,10 @@ public class EmployeesTests
     public void EmployeesConstructor_ShouldThrowCircularReferenceException_IfCircularReferencesExists()
     {
         // Arrange
-        var csvString = "'Employee1','Employee5',500 \n" +
-                        "'Employee4','Employee2',1300\n" +
-                        "'Employee2','Employee4',830 \n" +
-                        "'Employee5','Employee4',400";
+        var csvString = "\"Employee1\",\"Employee5\",500 \n" +
+                        "\"Employee4\",\"Employee2\",1300\n" +
+                        "\"Employee2\",\"Employee4\",830 \n" +
+                        "\"Employee5\",\"Employee4\",400";
 
         // Act
         var result = () => new Employees(csvString);
@@ -152,20 +153,20 @@ public class EmployeesTests
         // Assert
         result.Should()
             .ThrowExactly<CircularReferenceException>()
-            .WithMessage("Employee: Employee2 and Employee4 are in a circular reference.");
+            .WithMessage("Employee: \"Employee2\" and \"Employee4\" are in a circular reference.");
     }
 
     [Fact]
     public void GetSalaryBudgetForManager_ShouldReturnSalaryBudget_IfCsvStringValid()
     {
         // Arrange
-        var csvString = "'Employee1','Employee5',500 \n" +
-                        "'Employee4','Employee2',1300\n" +
-                        "'Employee3','Employee1',830 \n" +
-                        "'Employee5','Employee4',400";
+        var csvString = "\"Employee1\",\"Employee5\",500 \n" +
+                        "\"Employee4\",\"Employee2\",1300\n" +
+                        "\"Employee3\",\"Employee1\",830 \n" +
+                        "\"Employee5\",\"Employee4\",400";
         
         // Act
-        var result = new Employees(csvString).GetSalaryBudgetForManger("Employee1");
+        var result = new Employees(csvString).GetSalaryBudgetForManager("Employee1");
         
         // Assert
         result.Should().Be(1300);

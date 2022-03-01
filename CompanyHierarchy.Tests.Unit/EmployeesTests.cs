@@ -166,8 +166,7 @@ public class EmployeesTests
     [InlineData("\"Employee1\"", 1_930)]
     [InlineData("\"Employee8\"", 1_730)]
     [InlineData("\"Employee5\"", 4_990)]
-    public void GetManagerSalaryBudget_ShouldReturnSalaryBudget_IfManagerIdIsValid(string managerId,
-        long expectSalaryBudget)
+    public void GetManagerSalaryBudget_ShouldReturnSalaryBudget_IfManagerIdIsValid(string managerId, long expectSalaryBudget)
     {
         // Act
         var result = new Employees(validCsvString2).GetSalaryBudgetForManager(managerId);

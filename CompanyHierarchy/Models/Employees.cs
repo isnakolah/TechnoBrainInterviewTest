@@ -24,7 +24,7 @@ internal sealed class Employees
                 throw new CEOAlreadyExistsException();
 
             // make sure the employee is not manager of himself
-            if (!employeeIsCEO && employeeId == managerId || IsCircularReference(employeeId, managerId!))
+            if (!employeeIsCEO && employeeId == managerId || IsCircularReference(employeeId, managerId))
                 throw new CircularReferenceException(employeeId, managerId!);
 
             if (employees.ContainsKey(employeeId))

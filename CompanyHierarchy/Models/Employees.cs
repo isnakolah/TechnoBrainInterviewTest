@@ -39,8 +39,33 @@ internal sealed class Employees
 
     internal long GetSalaryBudgetForManager(string managerId)
     {
-        // get sum of all employees reporting directly or indirectly to the manager, plus the salary of the manager
-        throw new NotImplementedException();
+        if (string.IsNullOrWhiteSpace(managerId))
+            throw new ArgumentException("Parameter 'managerId' cannot be null or whitespace");
+
+        // all managers are employees
+        if (!employees.ContainsKey(managerId))
+            throw new ManagerNotFoundException(managerId);
+
+        var salaryBudget = CalculateSalaryOfDirectAndIndirectEmployees(managerId);
+        
+        return salaryBudget;
+    }
+
+    private long CalculateSalaryOfDirectAndIndirectEmployees(string managerId)
+    {
+        var totalSalary = employees[managerId].salary;
+
+        var employeesUnderManager = employees
+            .Where(x => x.Value.managerId == managerId)
+            .Select(x => x.Key)
+            .ToArray();
+
+        if (!employeesUnderManager.Any())
+            return totalSalary;
+
+        totalSalary += employeesUnderManager.Sum(CalculateSalaryOfDirectAndIndirectEmployees);
+
+        return totalSalary;
     }
 
     private static IEnumerable<(string, string?, long)> SplitCsvString(string csvString)

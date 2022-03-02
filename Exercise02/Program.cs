@@ -12,6 +12,8 @@ while (true)
         Console.Write("Number to convert: ");
 
         var userInput = string.Join("", Console.ReadLine()?.Split(',') ?? Array.Empty<string>());
+        
+        // seperate int and biginterger numbers, if number is greater than 2 billion, make biginterger
 
         if (!int.TryParse(userInput, out var num))
             throw new InvalidInputException();

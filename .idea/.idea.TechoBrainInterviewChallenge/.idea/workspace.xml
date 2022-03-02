@@ -9,19 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f096c05-024f-4b2c-8441-43719630252b" name="Changes" comment="Add readme files to the solution file">
-      <change afterPath="$PROJECT_DIR$/Exercise01.Tests.Unit/Exercise01.Tests.Unit.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise01/Exercise01.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise01/Extensions/NumberExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise02.Tests.Unit/Exercise02.Tests.Unit.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise02/Exceptions/InvalidInputException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise02/Exercise02.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercise02/Program.cs" afterDir="false" />
+    <list default="true" id="9f096c05-024f-4b2c-8441-43719630252b" name="Changes" comment="Setup Exercise02 and Exercise03 projects">
+      <change afterPath="$PROJECT_DIR$/Exercise01.Tests.Unit/Services/TowardsTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exercise01/Exceptions/InvalidTypeException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exercise01/Services/Towards.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TechoBrainInterviewChallenge/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TechoBrainInterviewChallenge/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompanyHierarchy.Tests.Unit/EmployeesTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyHierarchy.Tests.Unit/EmployeesTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompanyHierarchy/Models/Employees.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CompanyHierarchy/Models/Employees.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechoBrainInterviewChallenge.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TechoBrainInterviewChallenge.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TechoBrainInterviewChallenge.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/TechoBrainInterviewChallenge.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise01.Tests.Unit/Exercise01.Tests.Unit.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise01.Tests.Unit/Exercise01.Tests.Unit.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise01/Extensions/NumberExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise01/Extensions/NumberExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercise02/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Exercise02/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,26 +37,11 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy.Tests.Unit/EmployeesTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Models/Employees.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy.Tests.Unit/EmployeesTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Models/Employees.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Models/Employees.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy.Tests.Unit/EmployeesTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Models/Employees.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/df71358f7b7337a1eee3a65abe6d678dd9a065e256b8cc3fd44a2949754/Object.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Models/Employees.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Exceptions/CircularReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/20fca81498b8319d81f9dc70a6d3c0805c95fc99179952332a26ed38b5fd1ef/DelegateAssertions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Models/Employees.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5fead5fbf2bee3da1b9f378a09d78479a62db80dae1e1c6453efdb0bc92a8/String.Comparison.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/198a6261cebc324728dcc4c178edc5f2894123f711722c80e8557cbfd27651/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d52ad825f2d14c7d999168c572a071a8a1e00/52/1bd7db29/XUnit2TestFramework.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nakol/dev/projects/TechoBrainInterviewChallenge/CompanyHierarchy.Tests.Unit/EmployeesTests.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -153,7 +133,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1646065745974</updated>
-      <workItem from="1646065764040" duration="36052000" />
+      <workItem from="1646065764040" duration="38214000" />
+      <workItem from="1646190183783" duration="5852000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1646066182965</created>
@@ -281,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646162292049</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Setup Exercise02 and Exercise03 projects">
+      <created>1646170573883</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1646170573883</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,6 +305,32 @@
     <MESSAGE value="Write logic to GetSalaryBudgetForManager" />
     <MESSAGE value="Remove exception test and exception class to check if employee is manager" />
     <MESSAGE value="Add readme files to the solution file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add readme files to the solution file" />
+    <MESSAGE value="Setup Exercise02 and Exercise03 projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Setup Exercise02 and Exercise03 projects" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="DotNet Exception Breakpoints">
+          <properties exception="System.Collections.Generic.KeyNotFoundException" isInternal="false" displayValue="KeyNotFoundException" namespaceName="System.Collections.Generic">
+            <option name="internal" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Exercise01/Services/Towards.cs</url>
+          <line>71</line>
+          <properties documentPath="C:\Users\nakol\dev\projects\TechoBrainInterviewChallenge\Exercise01\Services\Towards.cs" initialLine="71" containingFunctionPresentation="method 'Towards'">
+            <startOffsets>
+              <option value="1795" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1838" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

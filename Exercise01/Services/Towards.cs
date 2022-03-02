@@ -78,7 +78,7 @@ internal static class TowardsService
     {
         var threeDigits = numStr.Length >= 3 ? numStr[^3..]: numStr;
 
-        if (numStr.Length < 3)
+        if (numStr.Length <= 3)
             return GetWords(pos, threeDigits);
         
         var numberAsString = GetWords(pos, threeDigits) + ToWords(pos+1, numStr[..3]);
@@ -89,12 +89,16 @@ internal static class TowardsService
     private static string GetWords(int pos, string numStr)
     {
         var hundreds = numStr.Length > 2 ? numStr[0] : '0';
+        
+        var hundredIsThere = hundreds != '0';
 
         var tens = numStr.Length >= 2 ? numStr[..2] : numStr;
 
         var and = hundreds != '0' ? "and" : "";
+        
+        var hundredsSpaces = hundredIsThere ? $" hundred {and} " : "";
 
-        return numWords[hundreds.ToString()] + and + GetTensWording(tens) + " " + illions[pos];
+        return numWords[hundreds.ToString()] + hundredsSpaces + GetTensWording(tens) + " " + illions[pos];
     }
 
     private static string GetTensWording(string tens)

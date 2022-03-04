@@ -59,7 +59,9 @@ public class EmployeesTests
         var result = () => new Employees(null!);
 
         // Assert
-        result.Should().ThrowExactly<CsvStringIsNullOrEmptyException>();
+        result.Should()
+            .ThrowExactly<CsvStringIsNullOrEmptyException>()
+            .WithMessage("Csv string cannot be null or empty.");
     }
 
     [Fact]

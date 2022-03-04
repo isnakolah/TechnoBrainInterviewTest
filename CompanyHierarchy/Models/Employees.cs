@@ -4,45 +4,54 @@ namespace CompanyHierarchy.Models;
 
 internal sealed class Employees
 {
-    private readonly bool CEOExists;
-    private readonly IDictionary<string, (string? managerId, long salary)> employees;
+    private record Employee(string Id, string? ManagerId, long Salary, HashSet<string> Subordinates)
+    {
+        public bool IsCEO() => ManagerId is null;
+    }
+
+    private readonly IDictionary<string, Employee> employees;
 
     public Employees(string csvString)
     {
         if (string.IsNullOrWhiteSpace(csvString))
             throw new CsvStringIsNullOrEmptyException();
 
-        employees = new Dictionary<string, (string? employeeId, long salary)>();
+        employees = new Dictionary<string, Employee>();
 
-        var csvEntries = SplitCsvString(csvString);
+        var newEmployees = SplitCsvString(csvString);
 
-        foreach (var (employeeId, managerId, salary) in csvEntries)
+        foreach (var newEmployee in newEmployees)
         {
-            var employeeIsCEO = string.IsNullOrWhiteSpace(managerId);
-
-            if (employeeIsCEO && CEOExists)
+            if (newEmployee.IsCEO() && CEOExists())
                 throw new CEOAlreadyExistsException();
 
-            // make sure the employee is not manager of himself
-            if (!employeeIsCEO && employeeId == managerId || IsCircularReference(employeeId, managerId))
-                throw new CircularReferenceException(employeeId, managerId!);
+            var (id, managerId, _, _) = newEmployee;
 
-            if (employees.ContainsKey(employeeId))
-                throw new EmployeeAlreadyHasManagerException(employeeId);
+            if (id == managerId || IsCircularReference(newEmployee))
+                throw new CircularReferenceException(id, managerId!);
 
-            if (employeeIsCEO)
-                CEOExists = true;
+            if (employees.Values.Any(x => x.Subordinates.Contains(id)))
+                throw new EmployeeAlreadyHasManagerException(id);
 
-            employees.Add(employeeId, (managerId, salary));
+            if (!employees.ContainsKey(id))
+                employees.Add(id, newEmployee);
+
+            else if (employees[id] is {Id: "", Salary: 0, ManagerId: ""})
+                employees[id] = newEmployee with {Subordinates = employees[id].Subordinates};
+
+            if (!newEmployee.IsCEO() && employees.ContainsKey(managerId!))
+                employees[managerId!].Subordinates.Add(id);
+
+            else if (!newEmployee.IsCEO() && !employees.ContainsKey(managerId!))
+                employees.Add(managerId!, new Employee(string.Empty, string.Empty, 0, new HashSet<string> {id}));
         }
     }
 
-    internal long GetSalaryBudgetForManager(string managerId)
+    public long GetSalaryBudgetForManager(string managerId)
     {
         if (string.IsNullOrWhiteSpace(managerId))
             throw new ArgumentException("Parameter 'managerId' cannot be null or whitespace");
 
-        // all managers are employees
         if (!employees.ContainsKey(managerId))
             throw new ManagerNotFoundException(managerId);
 
@@ -51,24 +60,26 @@ internal sealed class Employees
         return salaryBudget;
     }
 
+    private bool CEOExists()
+    {
+        return employees.Values.Any(x => x.IsCEO());
+    }
+
     private long CalculateSalaryOfDirectAndIndirectEmployees(string managerId)
     {
-        var totalSalary = employees[managerId].salary;
+        var totalSalary = employees[managerId].Salary;
 
-        var employeesUnderManager = employees
-            .Where(x => x.Value.managerId == managerId)
-            .Select(x => x.Key)
-            .ToArray();
+        var subordinates = employees[managerId].Subordinates;
 
-        if (!employeesUnderManager.Any())
+        if (!subordinates.Any()) 
             return totalSalary;
 
-        totalSalary += employeesUnderManager.Sum(CalculateSalaryOfDirectAndIndirectEmployees);
+        totalSalary += subordinates.Sum(CalculateSalaryOfDirectAndIndirectEmployees);
 
         return totalSalary;
     }
 
-    private static IEnumerable<(string, string?, long)> SplitCsvString(string csvString)
+    private static IEnumerable<Employee> SplitCsvString(string csvString)
     {
         var entries = csvString
             .Split("\n", StringSplitOptions.RemoveEmptyEntries)
@@ -83,21 +94,24 @@ internal sealed class Employees
                 if (!long.TryParse(data[2], out var salary))
                     throw new InvalidIntegerException(data[0]);
 
-                return (employeeId, managerId, salary);
+                return new Employee(employeeId, managerId, salary, new HashSet<string>());
             });
 
         return entries;
     }
 
-    private bool IsCircularReference(string employeeId, string? managerId)
+    private bool IsCircularReference(Employee employee)
     {
-        managerId ??= string.Empty;
+        if (employee.IsCEO())
+            return false;
 
-        if (employees.ContainsKey(employeeId))
-            return employees[employeeId].managerId == managerId;
+        var (employeeId, managerId, _, _) = employee;
 
-        if (employees.ContainsKey(managerId))
-            return employees[managerId].managerId == employeeId;
+        if (employees.ContainsKey(employeeId) && employees[employeeId] is not {ManagerId: "", Salary: 0})
+            return employees[employeeId].ManagerId == managerId;
+
+        if (employees.ContainsKey(managerId!) && employees[managerId!] is not {ManagerId: "", Salary: 0})
+            return employees[managerId!].ManagerId == employeeId;
 
         return false;
     }

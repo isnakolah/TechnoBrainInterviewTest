@@ -134,6 +134,11 @@ public class EmployeesTests
                 "\"Employee5\",\"Employee4\",400")]
     [InlineData("\"Employee1\",\"Employee5\",500 \n" +
                 "\"Employee4\",,1300\n" +
+                "\"Employee8\",\"Employee3\",930 \n" +
+                "\"Employee2\",,830 \n" +
+                "\"Employee5\",\"Employee2\",400")]
+    [InlineData("\"Employee1\",\"Employee5\",500 \n" +
+                "\"Employee4\",,1300\n" +
                 "\"Employee3\",\"\",830 \n" +
                 "\"Employee5\",\"Employee4\",400", Skip = "Empty quoted string not identified as empty string")]
     public void EmployeesConstructor_ShouldThrowCEOAlreadyExistsException_IfCEOAlreadyExists(string csvString)

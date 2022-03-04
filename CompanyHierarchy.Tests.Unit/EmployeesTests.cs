@@ -140,7 +140,9 @@ public class EmployeesTests
         var result = () => new Employees(csvString);
 
         // Assert
-        result.Should().ThrowExactly<CEOAlreadyExistsException>();
+        result.Should()
+            .ThrowExactly<CEOAlreadyExistsException>()
+            .WithMessage("CEO already exists!");
     }
 
     [Fact]
@@ -193,6 +195,7 @@ public class EmployeesTests
     [InlineData("")]
     [InlineData(" ")]
     public void GetManagerSalaryBudget_ShouldThrowArgumentException_IfManagerIdIsInvalid(string managerId)
+    
     {
         // Arrange
         const string csvString = "\"Employee4\",\"Employee2\",500 \n" +
@@ -223,6 +226,8 @@ public class EmployeesTests
         var result = () => new Employees(csvString).GetSalaryBudgetForManager("Employee6");
 
         // Assert
-        result.Should().ThrowExactly<ManagerNotFoundException>("Manager with id Employee6 was not found");
+        result.Should()
+            .ThrowExactly<ManagerNotFoundException>()
+            .WithMessage("Manager with id Employee6 was not found");
     }
 }
